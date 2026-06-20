@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.claude/
+
+# Private reference material used to generate public page content.
+/Docs/
+/docs/

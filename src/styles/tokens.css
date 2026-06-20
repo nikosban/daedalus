@@ -1,0 +1,65 @@
+:root {
+  /* Color */
+  --color-ink-90: rgb(0 0 0 / 90%);
+  --color-ink-70: rgb(0 0 0 / 70%);
+  --color-icon-inline: rgb(0 0 0 / 55%);
+  --color-ink-14: rgb(0 0 0 / 14%);
+  --color-ink-03: rgb(0 0 0 / 3%);
+  --color-surface: #fff;
+
+  /* Typography */
+  --font-sans: "Geist Variable", sans-serif;
+  --font-mono: "Geist Mono Variable", monospace;
+  --font-annotation: "Shantell Sans Variable", cursive;
+
+  /* Major Second type scale: 1rem base × 1.125 */
+  --type-base: 1rem;
+  --type-ratio: 1.125;
+  --text-step--2: 0.7901rem;
+  --text-step--1: 0.8889rem;
+  --text-step-0: var(--type-base);
+  --text-step-1: 1.125rem;
+  --text-step-2: 1.2656rem;
+  --text-step-3: 1.4238rem;
+
+  /* Line-height scale: 4px vertical rhythm at a 16px root */
+  --leading-5: 1.25rem;
+  --leading-6: 1.5rem;
+  --leading-7: 1.75rem;
+  --leading-8: 2rem;
+  --weight-medium: 500;
+  --annotation-weight: 450;
+  --annotation-informality: 70;
+  --annotation-bounce: 20;
+  --annotation-spacing: 10;
+
+  /* Iconography */
+  --icon-size-text: max(1cap, 14px);
+  --icon-size-small: 12px;
+  --icon-stroke-regular: 1.75;
+  --icon-stroke-medium: 2;
+  --icon-optical-adjustment: 1px;
+
+  /* Spacing: 8px base */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+
+  /* Shape, elevation, and motion */
+  --radius-sm: 0.5rem;
+  --radius-round: 999px;
+  --shadow-floating:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 4px 8px rgb(0 0 0 / 5%),
+    0 12px 32px rgb(0 0 0 / 8%);
+  --duration-fast: 160ms;
+
+  /* Layout */
+  --content-width: 45rem;
+  --playground-width: 72rem;
+  --sidebar-width: 13rem;
+}

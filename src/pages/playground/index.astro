@@ -1,0 +1,296 @@
+---
+import { ArrowUpRight, Download, Mail } from "@lucide/astro";
+import Icon from "../../components/Icon.astro";
+import ProfileIntro from "../../components/ProfileIntro.astro";
+import RoleList from "../../components/RoleList.astro";
+import WorkCard from "../../components/WorkCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Design library"
+  description="Internal design foundations, components, and sections."
+  canonicalPath="/playground/"
+  noindex
+>
+  <div class="playground-layout">
+    <aside class="playground-sidebar" aria-label="Design library navigation">
+      <header class="playground-sidebar-header">
+        <p class="playground-sidebar-title">Playground</p>
+        <p class="meta">Internal design library</p>
+        <a class="playground-home-link meta" href="/">View public site ↗</a>
+      </header>
+      <nav class="playground-nav">
+        <div>
+          <span class="meta">Foundations</span>
+          <ul>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#color">Color</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#elevation">Elevation</a></li>
+            <li><a href="#iconography">Iconography</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="meta">Components</span>
+          <ul>
+            <li><a href="#work-card">Work card</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="meta">Sections</span>
+          <ul>
+            <li><a href="#profile-section">Profile</a></li>
+            <li><a href="#experience-section">Experience</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main id="main-content" class="page playground">
+      <header>
+        <h1>Design library</h1>
+        <p>
+          Shared foundations and production components. Changes here propagate
+          to the public site through the same tokens and source components.
+        </p>
+      </header>
+
+      <section class="library-group" aria-labelledby="foundations-title">
+        <header>
+          <h2 id="foundations-title">Foundations</h2>
+          <p>CSS variables define the visual system from one source.</p>
+        </header>
+
+        <article class="library-example" id="typography">
+          <header>
+            <h3>Typography</h3>
+            <p class="meta">Major Second · 1rem base · 1.125 ratio</p>
+          </header>
+          <div class="documentation-table-wrap">
+            <table class="documentation-table">
+              <caption>Major Second type scale</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Token</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Line height</th>
+                  <th scope="col">Usage and sample</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>--text-step--2</code></th>
+                  <td class="meta">0.7901rem</td>
+                  <td class="meta">20px</td>
+                  <td class="type-scale-step type-scale-step--minus-2">Metadata and labels</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--text-step--1</code></th>
+                  <td class="meta">0.8889rem</td>
+                  <td class="meta">20px</td>
+                  <td class="type-scale-step type-scale-step--minus-1">Section labels</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--text-step-0</code></th>
+                  <td class="meta">1rem</td>
+                  <td class="meta">24px</td>
+                  <td class="type-scale-step type-scale-step--0">Body and component text</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--text-step-1</code></th>
+                  <td class="meta">1.125rem</td>
+                  <td class="meta">24px</td>
+                  <td class="type-scale-step type-scale-step--1">Supporting emphasis</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--text-step-2</code></th>
+                  <td class="meta">1.2656rem</td>
+                  <td class="meta">28px</td>
+                  <td class="type-scale-step type-scale-step--2">Primary headings</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--text-step-3</code></th>
+                  <td class="meta">1.4238rem</td>
+                  <td class="meta">32px</td>
+                  <td class="type-scale-step type-scale-step--3">Display text</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="documentation-table-wrap typography-families">
+            <table class="documentation-table">
+              <caption>Font families</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Token</th>
+                  <th scope="col">Family</th>
+                  <th scope="col">Sample</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><code>--font-sans</code></th>
+                  <td class="meta">Geist</td>
+                  <td class="type-sample">Clear interfaces for complex work.</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--font-mono</code></th>
+                  <td class="meta">Geist Mono</td>
+                  <td class="mono-sample">2025 — Present · Metadata</td>
+                </tr>
+                <tr>
+                  <th scope="row"><code>--font-annotation</code></th>
+                  <td class="meta">Shantell Sans</td>
+                  <td><span class="annotation annotation-sample">More context →</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="typography-note meta">
+            Line heights use a 4px rhythm: 20, 24, 28, and 32px.
+            Shantell Sans is annotation-only.
+          </p>
+        </article>
+
+        <article class="library-example" id="color">
+          <header>
+            <h3>Color</h3>
+            <p class="meta">Content-led neutral palette</p>
+          </header>
+          <div class="documentation-table-wrap">
+            <table class="documentation-table">
+              <caption>Color tokens</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Token</th>
+                  <th scope="col">Value</th>
+                  <th scope="col">Sample</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>--color-ink-90</code></th><td class="meta">Black · 90%</td><td><span class="color-sample color-sample--heading"></span></td></tr>
+                <tr><th scope="row"><code>--color-ink-70</code></th><td class="meta">Black · 70%</td><td><span class="color-sample color-sample--body"></span></td></tr>
+                <tr><th scope="row"><code>--color-surface</code></th><td class="meta">#fff</td><td><span class="color-sample color-sample--surface"></span></td></tr>
+                <tr><th scope="row"><code>--color-ink-14</code></th><td class="meta">Black · 14%</td><td><span class="color-sample color-sample--line"></span></td></tr>
+                <tr><th scope="row"><code>--color-ink-03</code></th><td class="meta">Black · 3%</td><td><span class="color-sample color-sample--hover"></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="library-example" id="spacing">
+          <header>
+            <h3>Spacing</h3>
+            <p class="meta">8px base scale</p>
+          </header>
+          <div class="documentation-table-wrap">
+            <table class="documentation-table">
+              <caption>8px spacing scale</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Token</th>
+                  <th scope="col">Value</th>
+                  <th scope="col">Sample</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>--space-1</code></th><td class="meta">8px</td><td><span class="space-sample space-sample--1"></span></td></tr>
+                <tr><th scope="row"><code>--space-2</code></th><td class="meta">16px</td><td><span class="space-sample space-sample--2"></span></td></tr>
+                <tr><th scope="row"><code>--space-3</code></th><td class="meta">24px</td><td><span class="space-sample space-sample--3"></span></td></tr>
+                <tr><th scope="row"><code>--space-4</code></th><td class="meta">32px</td><td><span class="space-sample space-sample--4"></span></td></tr>
+                <tr><th scope="row"><code>--space-6</code></th><td class="meta">48px</td><td><span class="space-sample space-sample--6"></span></td></tr>
+                <tr><th scope="row"><code>--space-8</code></th><td class="meta">64px</td><td><span class="space-sample space-sample--8"></span></td></tr>
+                <tr><th scope="row"><code>--space-12</code></th><td class="meta">96px</td><td><span class="space-sample space-sample--12"></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="library-example" id="elevation">
+          <header>
+            <h3>Elevation</h3>
+            <p class="meta">--shadow-floating</p>
+          </header>
+          <div class="elevation-sample" aria-label="Floating elevation sample"></div>
+        </article>
+
+        <article class="library-example" id="iconography">
+          <header>
+            <h3>Iconography</h3>
+            <p class="meta">Lucide · shared Icon component</p>
+          </header>
+          <div class="icon-documentation">
+            <div class="icon-example-row">
+              <span class="icon-text-example">
+                Paired with text
+                <Icon icon={ArrowUpRight} weight="regular" optical="up" />
+              </span>
+              <span class="meta">max(1cap, 14px) · 1.75px stroke · −1px optical adjustment</span>
+            </div>
+            <div class="icon-example-row">
+              <span class="icon-text-example icon-text-example--medium">
+                Medium text
+                <Icon icon={Mail} weight="medium" optical="up" />
+              </span>
+              <span class="meta">500 text · 2px stroke</span>
+            </div>
+            <div class="icon-example-row">
+              <span class="icon-text-example">
+                Small utility
+                <Icon icon={Download} size="small" />
+              </span>
+              <span class="meta">12px · explicit pixels below 14px</span>
+            </div>
+          </div>
+          <ul class="icon-rules">
+            <li>Match icon stroke weight to the adjacent font weight.</li>
+            <li>Use a slightly lighter tone when an icon appears beside text.</li>
+            <li>Use <code>1cap</code> for text-relative sizing; use pixels below 14px.</li>
+            <li>Adjust optical alignment in ±1px increments, not by geometric centering.</li>
+            <li>Present three icon choices before implementation unless the symbol is unambiguous.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="library-group" aria-labelledby="components-title">
+        <header>
+          <h2 id="components-title">Components</h2>
+          <p>Reusable interface elements with production states.</p>
+        </header>
+        <article class="library-example" id="work-card">
+          <header>
+            <h3>Work card</h3>
+            <p class="meta">Default · hover · focus · expanded</p>
+          </header>
+          <WorkCard
+            title="Interactive work card"
+            date="2026"
+            description="Use Tab to focus the card, then Enter or Space to inspect its expanded state."
+          />
+        </article>
+      </section>
+
+      <section class="library-group" aria-labelledby="sections-title">
+        <header>
+          <h2 id="sections-title">Sections</h2>
+          <p>Complete page sections rendered from their production source.</p>
+        </header>
+        <div class="playground-stack">
+          <article class="library-example" id="profile-section">
+            <header>
+              <h3>Profile</h3>
+            </header>
+            <ProfileIntro />
+          </article>
+          <article class="library-example" id="experience-section">
+            <header>
+              <h3>Experience</h3>
+            </header>
+            <RoleList />
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
