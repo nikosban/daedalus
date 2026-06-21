@@ -50,7 +50,7 @@ test("homepage contains the approved content structure", async () => {
   assert.match(html, /Selected work/);
   assert.doesNotMatch(html, /id="now-title">Now/);
   assert.equal((html.match(/class="past-work-item"/g) ?? []).length, 5);
-  assert.equal((html.match(/class="project-row"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="project-row"/g) ?? []).length, 6);
   assert.doesNotMatch(html, /playground-sidebar/);
 });
 
@@ -144,7 +144,7 @@ test("section headings are concise while project descriptions remain", async () 
 
   assert.doesNotMatch(html, /A compact history of the companies/);
   assert.doesNotMatch(html, /Selected projects across data products/);
-  assert.equal((html.match(/class="project-description"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="project-description"/g) ?? []).length, 6);
 });
 
 test("footer is quiet and contains no links", async () => {
