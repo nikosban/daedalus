@@ -80,6 +80,22 @@ export const pastWork: PastWorkItem[] = [
 
 export const selectedWork: SelectedWorkItem[] = [
   {
+    id: "statista-statistics",
+    title: "Statistics Page Redesign",
+    company: "Statista",
+    description:
+      "Redesigned a page template used across 1M+ statistics pages, improving orientation, data visualization modularity, supporting text placement, and AI-assisted research continuations.",
+    tags: [
+      "Page templates",
+      "Data visualization",
+      "AI integration",
+      "Multi-team coordination",
+      "Modular systems",
+    ],
+    status: "Read case study",
+    href: "/work/statista-statistics",
+  },
+  {
     id: "ai-survey-workflows",
     title: "AI-assisted survey workflows",
     company: "Statista",

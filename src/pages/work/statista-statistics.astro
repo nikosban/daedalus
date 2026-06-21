@@ -1,0 +1,290 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import Icon from "../../components/Icon.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Statistics Page Redesign — Statista"
+  description="Redesigning a page template used across 1M+ statistics pages, improving page structure, data visualization modularity, and integrating AI-assisted research continuations."
+  canonicalPath="/work/statista-statistics"
+>
+  <div class="site-frame">
+    <div class="site-side" aria-hidden="true"></div>
+    <div class="site-page">
+      <nav class="cs-nav" aria-label="Breadcrumb">
+        <a href="/" class="cs-back">
+          <Icon icon={ArrowLeft} role="inline" />
+          Nikolaos Banis
+        </a>
+      </nav>
+
+      <article class="cs-article">
+        <header class="cs-header">
+          <div class="cs-kicker">
+            <span class="meta">Statista</span>
+            <span class="meta cs-kicker-sep" aria-hidden="true">·</span>
+            <span class="meta">2025 — Present</span>
+          </div>
+          <h1>Statistics Page Redesign</h1>
+          <p class="cs-subtitle">
+            Redesigning a page template used across 1M+ statistics pages
+          </p>
+        </header>
+
+        <div class="cs-highlights">
+          <p class="cs-highlights-label">What changed</p>
+          <ul class="cs-highlights-list">
+            <li>A clearer page structure that moves from orientation to data interpretation to next steps</li>
+            <li>A modular data visualization widget that can work across surfaces and contexts</li>
+            <li>Better placement of supporting text, recommendations, and source information</li>
+            <li>A contextual AI side panel that helps users continue from the statistic they are viewing</li>
+          </ul>
+          <p class="cs-highlights-note meta">
+            The first release showed positive movement in downloads per session,
+            recommendation usage, and user feedback. Full rollout data pending.
+          </p>
+        </div>
+
+        <div class="cs-body">
+          <section class="cs-section">
+            <h2>The problem was not more features</h2>
+            <p>
+              The old page had accumulated too many layers. Each addition made
+              sense at the time: more context, more actions, more
+              recommendations, more metadata, more product entry points. But
+              together, they made the page harder to read.
+            </p>
+            <p>
+              Users were not scrolling far enough to reach important
+              recommendations. Supporting text was often truncated. Key
+              information competed with secondary content. The page had become a
+              collection of useful parts without a strong enough reading flow.
+            </p>
+            <p>
+              So I started from subtraction. Instead of asking what else the
+              page needed, I stripped the page back to a blank canvas and mapped
+              every existing element into a clearer structure.
+            </p>
+            <ul class="cs-questions">
+              <li>What does the user need first?</li>
+              <li>What helps them trust the statistic?</li>
+              <li>What helps them understand the chart?</li>
+              <li>What helps them download or extract the data?</li>
+              <li>What helps them continue their research?</li>
+              <li>What can wait?</li>
+            </ul>
+            <p>That became the foundation of the redesign.</p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Start with orientation</h2>
+            <p>
+              A user arriving on a statistics page needs to understand where
+              they are quickly. They need to know what the statistic is about,
+              what unit it uses, what period it covers, who produced it, when it
+              was updated, and whether it fits their purpose. The old page did
+              not make that orientation clear enough.
+            </p>
+            <p>
+              So the top of the page became the first major design decision. The
+              header needed to carry the most important trust and relevance
+              signals before the user reached the chart.
+            </p>
+            <ul class="cs-questions">
+              <li>Title</li>
+              <li>Unit</li>
+              <li>Time period</li>
+              <li>Publication or update context</li>
+              <li>Author or source signal</li>
+              <li>Topic context</li>
+            </ul>
+            <p>
+              This gave users a stronger first read of the page. Before
+              interacting with the chart, they could understand the statistic,
+              judge relevance, and decide whether it was useful for their work.
+            </p>
+            <p>That solved the first layer of the problem. But the center of the page was still the chart.</p>
+          </section>
+
+          <section class="cs-section">
+            <h2>The chart needed to become a system</h2>
+            <p>
+              The data visualization widget was not only part of this page. It
+              had to work across multiple surfaces, product contexts, and page
+              structures. That changed the design problem.
+            </p>
+            <p>
+              If the widget was designed only for the statistics page, every
+              future use case would need another variation. The product would
+              continue accumulating one-off solutions. So I treated the widget
+              as a modular system.
+            </p>
+            <p>
+              It needed a stable structure, but flexible parts. Information
+              could be enabled, disabled, or customized depending on where the
+              widget appeared. I moved the title and description to the top,
+              kept support text close to the chart, placed actions at the
+              bottom, and made critical information like source and context
+              easier to find.
+            </p>
+            <p>
+              The goal was to make the widget easier to understand in place,
+              while making it portable enough to become a single source of truth
+              across the product. That decision mattered beyond the statistics
+              page — it gave the data visualization work a clearer direction for
+              the new product structure.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Context had to stay close to the data</h2>
+            <p>
+              One issue I noticed early was that users were not scrolling enough.
+              That meant important supporting information was technically
+              available but practically underused.
+            </p>
+            <p>
+              This mattered because Statista users often come to a page to
+              extract a statistic and return to their own tools. Download
+              behavior was one of the key signals I tracked because it reflected
+              that extraction workflow. But extraction without context can be
+              risky. Users still need to understand what the number means, what
+              period it covers, what source it comes from, and whether there are
+              important limitations.
+            </p>
+            <p>
+              So the supporting text had to move closer to the data. The page
+              needed to support quick extraction, but not at the cost of
+              interpretation. This became one of the main layout principles:
+              keep the chart, explanation, source, and actions connected enough
+              that users do not have to assemble the meaning of the page from
+              distant pieces.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Recommendations needed to become topical</h2>
+            <p>
+              The old page treated recommendations as something that appeared
+              after the main statistic. But if users did not scroll far enough,
+              those recommendations had little value.
+            </p>
+            <p>
+              This was also connected to a broader company goal: moving away
+              from separated content buckets and toward a more unified
+              topic-based experience. A user looking at EV interest in Germany
+              might also need related data on power generation, the battery
+              market, infrastructure, policy, or key players. Those are not
+              random next clicks — they are part of the same research path.
+            </p>
+            <p>
+              So I worked with multiple teams to create space for contextual
+              recommendations inside the page structure. The page became a
+              shared surface where different teams could contribute to the same
+              user journey: data visualization, recommendations, AI, content,
+              and research. The important part was keeping one shared goal: help
+              users understand the statistic and continue their research without
+              feeling like they are jumping between disconnected product areas.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Research shaped the first prototype</h2>
+            <p>
+              The first iteration was built from previous internal research,
+              existing product knowledge, and earlier findings about how users
+              consume data pages.
+            </p>
+            <p>
+              I then ran 10 qualitative sessions focused on how users read,
+              understand, and use statistics pages. The sessions had two parts.
+              The first part was discovery: how users consume data, what they
+              look for first, how they judge relevance, and what they need to do
+              next. The second part was validation: showing the prototype,
+              watching reactions, collecting feedback, and understanding where
+              the new structure helped or failed.
+            </p>
+            <p>
+              This gave me both behavioral context and direct feedback on the
+              proposed direction. Afterward, I synthesized the findings, aligned
+              stakeholders, and moved into implementation.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>The hardest part was orchestration</h2>
+            <p>
+              This redesign touched many teams. The page template was the
+              container, but the content and product capabilities came from
+              different areas: data visualization, recommendations, AI, content,
+              and engineering.
+            </p>
+            <p>My role was to create the structure that made those parts work together. That meant defining the page logic clearly enough that every team understood where their work belonged.</p>
+            <ul class="cs-questions">
+              <li>What belongs in the header?</li>
+              <li>What belongs inside the chart widget?</li>
+              <li>What belongs near the statistic?</li>
+              <li>What belongs in recommendations?</li>
+              <li>What belongs in the AI side panel?</li>
+              <li>What should stay out of the main flow?</li>
+            </ul>
+            <p>
+              The page had to be flexible enough to support different content
+              types, but strict enough to avoid becoming another inconsistent
+              legacy template.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Bringing AI into the page context</h2>
+            <p>
+              The AI side panel shipped with the new page experience. The goal
+              was not to add AI as a separate layer on top of the page. It
+              needed to work with the information the user was already viewing.
+            </p>
+            <p>
+              The page gave the AI context. The AI gave users another way to ask
+              questions, explore meaning, and move forward from the statistic.
+              This fit the larger direction of the redesign: the statistics page
+              should not be a dead end. It should help users understand,
+              extract, and continue.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>The final shift</h2>
+            <p>
+              The redesign changed the statistics page from a legacy content
+              template into a more flexible product surface.
+            </p>
+            <ul class="cs-outcomes">
+              <li>It improved orientation at the top of the page</li>
+              <li>It made the chart widget more modular and reusable</li>
+              <li>It brought supporting text closer to the data</li>
+              <li>It gave recommendations better context</li>
+              <li>It created space for AI without breaking the page flow</li>
+              <li>It aligned multiple teams around one shared structure</li>
+            </ul>
+            <p>
+              The most important design decision was subtraction. Instead of
+              adding another layer to an already crowded page, I worked backward
+              from what users needed to understand first, then rebuilt the page
+              around that flow.
+            </p>
+            <p>
+              The result is a page template that can support Statista's most
+              important page type today, while giving the company a stronger
+              foundation for future content types, recommendations, and
+              AI-assisted research.
+            </p>
+          </section>
+        </div>
+      </article>
+
+      <SiteFooter />
+    </div>
+    <div class="site-side" aria-hidden="true"></div>
+  </div>
+</BaseLayout>
