@@ -1,0 +1,63 @@
+---
+import { Mail } from "@lucide/astro";
+import Icon from "./Icon.astro";
+import LinkedInIcon from "./LinkedInIcon.astro";
+import XIcon from "./XIcon.astro";
+
+interface Props {
+  headingLevel?: "h1" | "h4";
+}
+
+const { headingLevel = "h1" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<header class="identity-header">
+  <div>
+    <Heading class="identity-name">Nikolaos Banis</Heading>
+    <p class="meta">Senior Product Designer</p>
+  </div>
+
+  <nav aria-label="Contact and profile">
+    <ul class="identity-actions">
+      <li>
+        <a
+          aria-label="Email Nikolaos Banis"
+          class="action-link tooltip-motion-scale"
+          href="mailto:nbanis30@gmail.com"
+        >
+          <Icon icon={Mail} role="control" optical="up" />
+          <span aria-hidden="true" class="action-tooltip" role="tooltip">
+            Send me a message
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          aria-label="View Nikolaos Banis on LinkedIn"
+          class="action-link tooltip-motion-scale"
+          href="https://linkedin.com/in/nikosbn"
+          rel="me noreferrer"
+        >
+          <LinkedInIcon />
+          <span aria-hidden="true" class="action-tooltip" role="tooltip">
+            Connect with me
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          aria-label="Follow Nikolaos Banis on X"
+          class="action-link tooltip-motion-scale"
+          href="https://x.com/Nikos_bn"
+          rel="me noreferrer"
+        >
+          <XIcon />
+          <span aria-hidden="true" class="action-tooltip" role="tooltip">
+            Follow me on X
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

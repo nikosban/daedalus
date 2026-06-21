@@ -1,9 +1,28 @@
 ---
-import { ArrowUpRight, Download, Mail } from "@lucide/astro";
+import {
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Download,
+  FolderKanban,
+  Layers,
+  Mail,
+  MonitorCog,
+  Palette,
+  PanelBottom,
+  Rows3,
+  Ruler,
+  Shapes,
+  Type,
+  UserRound,
+} from "@lucide/astro";
 import Icon from "../../components/Icon.astro";
-import ProfileIntro from "../../components/ProfileIntro.astro";
-import RoleList from "../../components/RoleList.astro";
-import WorkCard from "../../components/WorkCard.astro";
+import IdentityHeader from "../../components/IdentityHeader.astro";
+import IntroSection from "../../components/IntroSection.astro";
+import PastWorkAccordion from "../../components/PastWorkAccordion.astro";
+import ProjectRow from "../../components/ProjectRow.astro";
+import SelectedWorkList from "../../components/SelectedWorkList.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { selectedWork } from "../../data/homepage";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
@@ -24,24 +43,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div>
           <span class="meta">Foundations</span>
           <ul>
-            <li><a href="#typography">Typography</a></li>
-            <li><a href="#color">Color</a></li>
-            <li><a href="#spacing">Spacing</a></li>
-            <li><a href="#elevation">Elevation</a></li>
-            <li><a href="#iconography">Iconography</a></li>
+            <li><a href="#typography"><Icon icon={Type} role="navigation" /><span>Typography</span></a></li>
+            <li><a href="#color"><Icon icon={Palette} role="navigation" /><span>Color</span></a></li>
+            <li><a href="#themes"><Icon icon={MonitorCog} role="navigation" /><span>Themes</span></a></li>
+            <li><a href="#spacing"><Icon icon={Ruler} role="navigation" /><span>Spacing</span></a></li>
+            <li><a href="#elevation"><Icon icon={Layers} role="navigation" /><span>Elevation</span></a></li>
+            <li><a href="#iconography"><Icon icon={Shapes} role="navigation" /><span>Iconography</span></a></li>
           </ul>
         </div>
         <div>
           <span class="meta">Components</span>
           <ul>
-            <li><a href="#work-card">Work card</a></li>
+            <li><a href="#project-row"><Icon icon={Rows3} role="navigation" /><span>Project row</span></a></li>
           </ul>
         </div>
         <div>
           <span class="meta">Sections</span>
           <ul>
-            <li><a href="#profile-section">Profile</a></li>
-            <li><a href="#experience-section">Experience</a></li>
+            <li><a href="#identity-section"><Icon icon={UserRound} role="navigation" /><span>Identity + intro</span></a></li>
+            <li><a href="#past-work-section"><Icon icon={BriefcaseBusiness} role="navigation" /><span>Past work</span></a></li>
+            <li><a href="#selected-work-section"><Icon icon={FolderKanban} role="navigation" /><span>Selected work</span></a></li>
+            <li><a href="#footer-section"><Icon icon={PanelBottom} role="navigation" /><span>Footer</span></a></li>
           </ul>
         </div>
       </nav>
@@ -65,55 +87,55 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <article class="library-example" id="typography">
           <header>
             <h3>Typography</h3>
-            <p class="meta">Major Second · 1rem base · 1.125 ratio</p>
+            <p class="meta">Compact product-system · semantic roles</p>
           </header>
           <div class="documentation-table-wrap">
             <table class="documentation-table">
-              <caption>Major Second type scale</caption>
+              <caption>Production semantic typography</caption>
               <thead>
                 <tr>
-                  <th scope="col">Token</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Line height</th>
-                  <th scope="col">Usage and sample</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Size/leading</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Tracking</th>
+                  <th scope="col">Usage</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row"><code>--text-step--2</code></th>
-                  <td class="meta">0.7901rem</td>
-                  <td class="meta">20px</td>
-                  <td class="type-scale-step type-scale-step--minus-2">Metadata and labels</td>
+                  <th scope="row"><code>display</code></th>
+                  <td class="meta">20px · 1.4</td>
+                  <td class="meta">550</td>
+                  <td class="meta">−0.015em</td>
+                  <td>Identity</td>
                 </tr>
                 <tr>
-                  <th scope="row"><code>--text-step--1</code></th>
-                  <td class="meta">0.8889rem</td>
-                  <td class="meta">20px</td>
-                  <td class="type-scale-step type-scale-step--minus-1">Section labels</td>
+                  <th scope="row"><code>title</code></th>
+                  <td class="meta">16px · 1.5</td>
+                  <td class="meta">550</td>
+                  <td class="meta">−0.015em</td>
+                  <td>Project titles</td>
                 </tr>
                 <tr>
-                  <th scope="row"><code>--text-step-0</code></th>
-                  <td class="meta">1rem</td>
-                  <td class="meta">24px</td>
-                  <td class="type-scale-step type-scale-step--0">Body and component text</td>
+                  <th scope="row"><code>label</code></th>
+                  <td class="meta">14px · 1.4286</td>
+                  <td class="meta">520</td>
+                  <td class="meta">Natural</td>
+                  <td>Sections and companies</td>
                 </tr>
                 <tr>
-                  <th scope="row"><code>--text-step-1</code></th>
-                  <td class="meta">1.125rem</td>
-                  <td class="meta">24px</td>
-                  <td class="type-scale-step type-scale-step--1">Supporting emphasis</td>
+                  <th scope="row"><code>copy</code></th>
+                  <td class="meta">14px · 1.5714</td>
+                  <td class="meta">400</td>
+                  <td class="meta">Natural</td>
+                  <td>Introduction and descriptions</td>
                 </tr>
                 <tr>
-                  <th scope="row"><code>--text-step-2</code></th>
-                  <td class="meta">1.2656rem</td>
-                  <td class="meta">28px</td>
-                  <td class="type-scale-step type-scale-step--2">Primary headings</td>
-                </tr>
-                <tr>
-                  <th scope="row"><code>--text-step-3</code></th>
-                  <td class="meta">1.4238rem</td>
-                  <td class="meta">32px</td>
-                  <td class="type-scale-step type-scale-step--3">Display text</td>
+                  <th scope="row"><code>meta</code></th>
+                  <td class="meta">13px · 1.5385</td>
+                  <td class="meta">400</td>
+                  <td class="meta">Natural</td>
+                  <td>Roles, dates, tags and status</td>
                 </tr>
               </tbody>
             </table>
@@ -148,8 +170,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </table>
           </div>
           <p class="typography-note meta">
-            Line heights use a 4px rhythm: 20, 24, 28, and 32px.
-            Shantell Sans is annotation-only.
+            Direction B is active in production. Geist Sans handles identity,
+            labels, and copy; Geist Mono is limited to metadata. Shantell Sans
+            remains annotation-only.
           </p>
         </article>
 
@@ -169,13 +192,30 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 </tr>
               </thead>
               <tbody>
-                <tr><th scope="row"><code>--color-ink-90</code></th><td class="meta">Black · 90%</td><td><span class="color-sample color-sample--heading"></span></td></tr>
-                <tr><th scope="row"><code>--color-ink-70</code></th><td class="meta">Black · 70%</td><td><span class="color-sample color-sample--body"></span></td></tr>
-                <tr><th scope="row"><code>--color-surface</code></th><td class="meta">#fff</td><td><span class="color-sample color-sample--surface"></span></td></tr>
-                <tr><th scope="row"><code>--color-ink-14</code></th><td class="meta">Black · 14%</td><td><span class="color-sample color-sample--line"></span></td></tr>
-                <tr><th scope="row"><code>--color-ink-03</code></th><td class="meta">Black · 3%</td><td><span class="color-sample color-sample--hover"></span></td></tr>
+                <tr><th scope="row"><code>--color-text-primary</code></th><td class="meta">Primary content</td><td><span class="color-sample color-sample--heading"></span></td></tr>
+                <tr><th scope="row"><code>--color-text-secondary</code></th><td class="meta">Supporting content</td><td><span class="color-sample color-sample--body"></span></td></tr>
+                <tr><th scope="row"><code>--color-surface-base</code></th><td class="meta">Page and controls</td><td><span class="color-sample color-sample--surface"></span></td></tr>
+                <tr><th scope="row"><code>--color-border-subtle</code></th><td class="meta">Structure and separators</td><td><span class="color-sample color-sample--line"></span></td></tr>
+                <tr><th scope="row"><code>--color-interactive-hover</code></th><td class="meta">Hover and selected chrome</td><td><span class="color-sample color-sample--hover"></span></td></tr>
               </tbody>
             </table>
+          </div>
+        </article>
+
+        <article class="library-example" id="themes">
+          <header>
+            <h3>Themes</h3>
+            <p class="meta">System · Light · Dark</p>
+          </header>
+          <div class="theme-preview-grid">
+            <div class="theme-preview theme-preview--light">
+              <span>Light</span>
+              <span class="meta">#fff · #f7f7f7</span>
+            </div>
+            <div class="theme-preview theme-preview--dark">
+              <span>Dark</span>
+              <span class="meta">#151515 · #1d1d1d</span>
+            </div>
           </div>
         </article>
 
@@ -205,49 +245,113 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               </tbody>
             </table>
           </div>
+          <div class="documentation-table-wrap foundation-detail-table">
+            <table class="documentation-table">
+              <caption>Structural layout roles</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Role</th>
+                  <th scope="col">Value</th>
+                  <th scope="col">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>--content-width</code></th><td class="meta">40rem</td><td>Public reading column</td></tr>
+                <tr><th scope="row"><code>--playground-content-width</code></th><td class="meta">45rem</td><td>Internal documentation column</td></tr>
+                <tr><th scope="row"><code>--interaction-target-min</code></th><td class="meta">2.75rem</td><td>Minimum interactive target</td></tr>
+                <tr><th scope="row">Component containers</th><td class="meta">30–32rem</td><td>Local stacking independent of viewport</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
 
         <article class="library-example" id="elevation">
           <header>
             <h3>Elevation</h3>
-            <p class="meta">--shadow-floating</p>
+            <p class="meta">Ordered depth, radius, stacking, and motion scales</p>
           </header>
-          <div class="elevation-sample" aria-label="Floating elevation sample"></div>
+          <div class="documentation-table-wrap">
+            <table class="documentation-table">
+              <caption>Elevation and shape foundations</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Foundation</th>
+                  <th scope="col">Tokens</th>
+                  <th scope="col">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Elevation</th><td class="meta">raised · panel · overlay</td><td>Controls, connected panels, floating navigation</td></tr>
+                <tr><th scope="row">Radius</th><td class="meta">control · surface · pill</td><td>Small controls, contained surfaces, segmented controls</td></tr>
+                <tr><th scope="row">Stacking</th><td class="meta">base · raised · tooltip · sticky</td><td>Predictable rendering order without arbitrary values</td></tr>
+                <tr><th scope="row">Motion</th><td class="meta">fast · theme · accordion</td><td>Durations and easing tied to interaction scale</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="elevation-samples" aria-label="Elevation samples">
+            <div class="elevation-sample elevation-sample--raised"><span class="meta">Raised</span></div>
+            <div class="elevation-sample elevation-sample--panel"><span class="meta">Panel</span></div>
+            <div class="elevation-sample elevation-sample--overlay"><span class="meta">Overlay</span></div>
+          </div>
         </article>
 
         <article class="library-example" id="iconography">
           <header>
             <h3>Iconography</h3>
-            <p class="meta">Lucide · shared Icon component</p>
+            <p class="meta">Lucide · semantic roles · accessible by default</p>
           </header>
+          <div class="documentation-table-wrap">
+            <table class="documentation-table">
+              <caption>Semantic icon roles</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Role</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Stroke</th>
+                  <th scope="col">Usage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>inline</code></th><td class="meta">14px</td><td class="meta">1.75px</td><td>Familiar icon paired with visible text</td></tr>
+                <tr><th scope="row"><code>navigation</code></th><td class="meta">16px</td><td class="meta">1.75px</td><td>Navigation landmarks with labels</td></tr>
+                <tr><th scope="row"><code>control</code></th><td class="meta">18px</td><td class="meta">2px</td><td>Standalone interactive controls</td></tr>
+                <tr><th scope="row"><code>disclosure</code></th><td class="meta">16px</td><td class="meta">2px</td><td>Expand, collapse, and reveal states</td></tr>
+                <tr><th scope="row"><code>metadata</code></th><td class="meta">14px</td><td class="meta">1.75px</td><td>Secondary supporting information</td></tr>
+                <tr><th scope="row"><code>illustration</code></th><td class="meta">24px+</td><td class="meta">2px</td><td>Large explanatory graphics</td></tr>
+              </tbody>
+            </table>
+          </div>
           <div class="icon-documentation">
             <div class="icon-example-row">
               <span class="icon-text-example">
-                Paired with text
-                <Icon icon={ArrowUpRight} weight="regular" optical="up" />
+                Inline action
+                <Icon icon={ArrowUpRight} role="inline" optical="up-right" />
               </span>
-              <span class="meta">max(1cap, 14px) · 1.75px stroke · −1px optical adjustment</span>
+              <span class="meta">14px · 1.75px · secondary tone</span>
             </div>
             <div class="icon-example-row">
               <span class="icon-text-example icon-text-example--medium">
-                Medium text
-                <Icon icon={Mail} weight="medium" optical="up" />
+                Standalone control
+                <Icon icon={Mail} role="control" optical="up" />
               </span>
-              <span class="meta">500 text · 2px stroke</span>
+              <span class="meta">18px · 2px · parent provides accessible name</span>
             </div>
             <div class="icon-example-row">
               <span class="icon-text-example">
-                Small utility
-                <Icon icon={Download} size="small" />
+                Metadata
+                <Icon icon={Download} role="metadata" />
               </span>
-              <span class="meta">12px · explicit pixels below 14px</span>
+              <span class="meta">14px · avoid reducing Lucide below this size</span>
             </div>
           </div>
           <ul class="icon-rules">
-            <li>Match icon stroke weight to the adjacent font weight.</li>
-            <li>Use a slightly lighter tone when an icon appears beside text.</li>
-            <li>Use <code>1cap</code> for text-relative sizing; use pixels below 14px.</li>
-            <li>Adjust optical alignment in ±1px increments, not by geometric centering.</li>
+            <li>Choose a semantic role; do not set arbitrary size or stroke values.</li>
+            <li>Icons paired with visible text are decorative and hidden from assistive technology.</li>
+            <li>Icon-only controls receive their accessible name from the parent button or link.</li>
+            <li>Essential controls and state indicators maintain at least 3:1 contrast.</li>
+            <li>Keep visible icon size separate from the 44px preferred interaction target.</li>
+            <li>Use ±1px optical correction only for directional, visually asymmetric symbols.</li>
+            <li>Use official SVG assets for brand marks rather than Lucide approximations.</li>
             <li>Present three icon choices before implementation unless the symbol is unambiguous.</li>
           </ul>
         </article>
@@ -258,16 +362,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <h2 id="components-title">Components</h2>
           <p>Reusable interface elements with production states.</p>
         </header>
-        <article class="library-example" id="work-card">
+        <article class="library-example" id="project-row">
           <header>
-            <h3>Work card</h3>
-            <p class="meta">Default · hover · focus · expanded</p>
+            <h3>Project row</h3>
+            <p class="meta">Upcoming state · shared production data</p>
           </header>
-          <WorkCard
-            title="Interactive work card"
-            date="2026"
-            description="Use Tab to focus the card, then Enter or Space to inspect its expanded state."
-          />
+          <ProjectRow project={selectedWork[0]} />
         </article>
       </section>
 
@@ -277,20 +377,83 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <p>Complete page sections rendered from their production source.</p>
         </header>
         <div class="playground-stack">
-          <article class="library-example" id="profile-section">
+          <article class="library-example" id="identity-section">
             <header>
-              <h3>Profile</h3>
+              <h3>Identity and introduction</h3>
+              <p class="meta">24px shared-group spacing</p>
             </header>
-            <ProfileIntro />
+            <div class="home-intro-group">
+              <IdentityHeader headingLevel="h4" />
+              <IntroSection headingLevel="h4" />
+            </div>
           </article>
-          <article class="library-example" id="experience-section">
+          <article class="library-example" id="past-work-section">
             <header>
-              <h3>Experience</h3>
+              <h3>Past work accordion</h3>
+              <p class="meta">Production structure · interruptible CSS motion</p>
             </header>
-            <RoleList />
+            <PastWorkAccordion headingLevel="h4" />
+          </article>
+          <article class="library-example" id="selected-work-section">
+            <header>
+              <h3>Selected work</h3>
+            </header>
+            <SelectedWorkList headingLevel="h4" />
+          </article>
+          <article class="library-example" id="footer-section">
+            <header>
+              <h3>Footer</h3>
+            </header>
+            <SiteFooter />
           </article>
         </div>
       </section>
     </main>
   </div>
+
+  <script>
+    const playgroundLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>(".playground-nav a[href^='#']"),
+    );
+    const playgroundSections = playgroundLinks
+      .map((link) => document.querySelector<HTMLElement>(link.hash))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const setActivePlaygroundSection = (id: string) => {
+      playgroundLinks.forEach((link) => {
+        if (link.hash === `#${id}`) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const initialPlaygroundSection =
+      location.hash.slice(1) || playgroundSections[0]?.id;
+    if (initialPlaygroundSection) {
+      setActivePlaygroundSection(initialPlaygroundSection);
+    }
+
+    playgroundLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        setActivePlaygroundSection(link.hash.slice(1));
+      });
+    });
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleSection) {
+          setActivePlaygroundSection(visibleSection.target.id);
+        }
+      },
+      { rootMargin: "-15% 0px -70% 0px", threshold: [0, 0.25, 0.5] },
+    );
+
+    playgroundSections.forEach((section) => sectionObserver.observe(section));
+  </script>
 </BaseLayout>

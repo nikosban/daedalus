@@ -1,65 +1,191 @@
 :root {
-  /* Color */
-  --color-ink-90: rgb(0 0 0 / 90%);
-  --color-ink-70: rgb(0 0 0 / 70%);
-  --color-icon-inline: rgb(0 0 0 / 55%);
-  --color-ink-14: rgb(0 0 0 / 14%);
-  --color-ink-03: rgb(0 0 0 / 3%);
-  --color-surface: #fff;
+  /* Raw neutral values */
+  --neutral-90: rgb(0 0 0 / 90%);
+  --neutral-70: rgb(0 0 0 / 70%);
+  --neutral-55: rgb(0 0 0 / 55%);
+  --neutral-14: rgb(0 0 0 / 14%);
+  --neutral-08: rgb(0 0 0 / 8%);
+  --neutral-03: rgb(0 0 0 / 3%);
+  --neutral-inverse-92: rgb(255 255 255 / 92%);
 
-  /* Typography */
+  /* Semantic color roles */
+  --color-text-primary: var(--neutral-90);
+  --color-text-secondary: var(--neutral-70);
+  --color-icon-secondary: var(--neutral-55);
+  --color-border-subtle: var(--neutral-14);
+  --color-decoration-subtle: var(--neutral-08);
+  --color-interactive-hover: var(--neutral-03);
+  --color-focus-ring: var(--color-text-primary);
+  --color-surface-base: #fff;
+  --color-surface-raised: #f7f7f7;
+  --color-tooltip-surface: var(--neutral-90);
+  --color-tooltip-text: var(--neutral-inverse-92);
+  --color-pattern-base: var(--color-interactive-hover);
+  --color-pattern-line: var(--color-decoration-subtle);
+  --color-preview-light-border: rgb(0 0 0 / 14%);
+  --color-preview-light-surface: #fff;
+  --color-preview-light-primary: rgb(0 0 0 / 90%);
+  --color-preview-light-secondary: rgb(0 0 0 / 70%);
+  --color-preview-dark-border: rgb(255 255 255 / 14%);
+  --color-preview-dark-surface: #151515;
+  --color-preview-dark-primary: rgb(255 255 255 / 92%);
+  --color-preview-dark-secondary: rgb(255 255 255 / 68%);
+
+  /* Typography families */
   --font-sans: "Geist Variable", sans-serif;
   --font-mono: "Geist Mono Variable", monospace;
   --font-annotation: "Shantell Sans Variable", cursive;
 
-  /* Major Second type scale: 1rem base × 1.125 */
-  --type-base: 1rem;
-  --type-ratio: 1.125;
-  --text-step--2: 0.7901rem;
-  --text-step--1: 0.8889rem;
-  --text-step-0: var(--type-base);
-  --text-step-1: 1.125rem;
-  --text-step-2: 1.2656rem;
-  --text-step-3: 1.4238rem;
-
-  /* Line-height scale: 4px vertical rhythm at a 16px root */
-  --leading-5: 1.25rem;
-  --leading-6: 1.5rem;
-  --leading-7: 1.75rem;
-  --leading-8: 2rem;
-  --weight-medium: 500;
-  --annotation-weight: 450;
-  --annotation-informality: 70;
-  --annotation-bounce: 20;
-  --annotation-spacing: 10;
+  /* Semantic typography: compact product-system */
+  --type-display-size: 1.25rem;
+  --type-display-leading: 1.4;
+  --type-display-weight: 550;
+  --type-display-tracking: -0.015em;
+  --type-title-size: 1rem;
+  --type-title-leading: 1.5;
+  --type-title-weight: 550;
+  --type-title-tracking: -0.015em;
+  --type-label-size: 0.875rem;
+  --type-label-leading: 1.4286;
+  --type-label-weight: 520;
+  --type-label-tracking: normal;
+  --type-copy-size: 0.875rem;
+  --type-copy-leading: 1.5714;
+  --type-copy-weight: 400;
+  --type-copy-tracking: normal;
+  --type-meta-size: 0.8125rem;
+  --type-meta-leading: 1.5385;
+  --type-meta-weight: 400;
+  --type-meta-tracking: normal;
+  --type-annotation-size: 1.2656rem;
+  --type-annotation-leading: 1.2;
+  --type-annotation-weight: 450;
+  --type-annotation-informality: 70;
+  --type-annotation-bounce: 20;
+  --type-annotation-spacing: 10;
 
   /* Iconography */
-  --icon-size-text: max(1cap, 14px);
-  --icon-size-small: 12px;
+  --icon-size-inline: 0.875rem;
+  --icon-size-navigation: 1rem;
+  --icon-size-control: 1.125rem;
+  --icon-size-disclosure: 1rem;
+  --icon-size-metadata: 0.875rem;
+  --icon-size-illustration: 1.5rem;
   --icon-stroke-regular: 1.75;
-  --icon-stroke-medium: 2;
+  --icon-stroke-strong: 2;
   --icon-optical-adjustment: 1px;
 
-  /* Spacing: 8px base */
+  /* Spacing: 8px base. Sub-8px values are optical/internal only. */
+  --space-optical-1: 0.125rem;
+  --space-optical-2: 0.1875rem;
+  --space-optical-3: 0.25rem;
+  --space-optical-4: 0.375rem;
   --space-1: 0.5rem;
+  --space-1-5: 0.75rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
   --space-4: 2rem;
   --space-6: 3rem;
   --space-8: 4rem;
+  --space-11: 5.5rem;
   --space-12: 6rem;
+  --section-title-gap: var(--space-3);
 
-  /* Shape, elevation, and motion */
-  --radius-sm: 0.5rem;
-  --radius-round: 999px;
-  --shadow-floating:
+  /* Radius scale */
+  --radius-control: 0.375rem;
+  --radius-surface: 0.5rem;
+  --radius-pill: 999px;
+
+  /* Ordered elevation scale */
+  --elevation-raised:
+    0 1px 1px rgb(0 0 0 / 8%),
+    0 2px 4px rgb(0 0 0 / 6%);
+  --elevation-panel:
+    0 1px 2px rgb(0 0 0 / 4%),
+    0 6px 18px rgb(0 0 0 / 6%);
+  --elevation-overlay:
     0 1px 2px rgb(0 0 0 / 5%),
     0 4px 8px rgb(0 0 0 / 5%),
     0 12px 32px rgb(0 0 0 / 8%);
-  --duration-fast: 160ms;
+
+  /* Stacking scale */
+  --z-base: 0;
+  --z-raised: 1;
+  --z-tooltip: 10;
+  --z-sticky: 20;
+
+  /* Motion scale */
+  --motion-duration-fast: 160ms;
+  --motion-duration-theme: 420ms;
+  --motion-duration-theme-indicator: 480ms;
+  --motion-duration-accordion-open: 320ms;
+  --motion-duration-accordion-close: 220ms;
+  --motion-duration-accordion-reduced: 120ms;
+  --motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-standard: cubic-bezier(0, 0, 0.2, 1);
 
   /* Layout */
-  --content-width: 45rem;
-  --playground-width: 72rem;
+  --content-width: 40rem;
+  --side-column-width: 2.5rem;
+  --playground-content-width: 45rem;
   --sidebar-width: 13rem;
+  --playground-section-gap: var(--space-11);
+  --control-size-compact: 2rem;
+  --interaction-target-min: 2.75rem;
+  --tooltip-max-width: 12rem;
+  --page-frame-line: 1px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --neutral-90: rgb(255 255 255 / 92%);
+  --neutral-70: rgb(255 255 255 / 68%);
+  --neutral-55: rgb(255 255 255 / 58%);
+  --neutral-14: rgb(255 255 255 / 14%);
+  --neutral-08: rgb(255 255 255 / 10%);
+  --neutral-03: rgb(255 255 255 / 5%);
+  --neutral-inverse-92: rgb(0 0 0 / 88%);
+  --color-surface-base: #151515;
+  --color-surface-raised: #1d1d1d;
+  --color-tooltip-surface: #f1efe9;
+  --color-pattern-base: #1a1a1a;
+  --elevation-raised:
+    0 1px 1px rgb(0 0 0 / 28%),
+    0 2px 4px rgb(0 0 0 / 20%);
+  --elevation-panel:
+    0 1px 2px rgb(0 0 0 / 24%),
+    0 6px 18px rgb(0 0 0 / 18%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --neutral-90: rgb(255 255 255 / 92%);
+    --neutral-70: rgb(255 255 255 / 68%);
+    --neutral-55: rgb(255 255 255 / 58%);
+    --neutral-14: rgb(255 255 255 / 14%);
+    --neutral-08: rgb(255 255 255 / 10%);
+    --neutral-03: rgb(255 255 255 / 5%);
+    --neutral-inverse-92: rgb(0 0 0 / 88%);
+    --color-surface-base: #151515;
+    --color-surface-raised: #1d1d1d;
+    --color-tooltip-surface: #f1efe9;
+    --color-pattern-base: #1a1a1a;
+    --elevation-raised:
+      0 1px 1px rgb(0 0 0 / 28%),
+      0 2px 4px rgb(0 0 0 / 20%);
+    --elevation-panel:
+      0 1px 2px rgb(0 0 0 / 24%),
+      0 6px 18px rgb(0 0 0 / 18%);
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-text-secondary: var(--neutral-90);
+    --color-icon-secondary: var(--neutral-90);
+    --color-border-subtle: var(--neutral-55);
+    --color-decoration-subtle: var(--neutral-55);
+  }
 }

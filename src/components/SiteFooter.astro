@@ -1,0 +1,106 @@
+---
+import { Monitor, Moon, Sun } from "@lucide/astro";
+import Icon from "./Icon.astro";
+---
+
+<footer class="site-footer">
+  <p class="meta">© Nikolaos Banis</p>
+
+  <fieldset class="theme-switcher" data-active-index="0">
+    <legend class="visually-hidden">Color theme</legend>
+    <span aria-hidden="true" class="theme-switcher-indicator"></span>
+    <label>
+      <input checked name="theme" type="radio" value="system" />
+      <span>
+        <Icon icon={Monitor} role="control" />
+        <span class="visually-hidden">System</span>
+      </span>
+    </label>
+    <label>
+      <input name="theme" type="radio" value="light" />
+      <span>
+        <Icon icon={Sun} role="control" />
+        <span class="visually-hidden">Light</span>
+      </span>
+    </label>
+    <label>
+      <input name="theme" type="radio" value="dark" />
+      <span>
+        <Icon icon={Moon} role="control" />
+        <span class="visually-hidden">Dark</span>
+      </span>
+    </label>
+  </fieldset>
+</footer>
+
+<script>
+  const storageKey = "theme";
+  const root = document.documentElement;
+  const switcher = document.querySelector<HTMLElement>(".theme-switcher");
+  const inputs = document.querySelectorAll<HTMLInputElement>(
+    '.theme-switcher input[name="theme"]',
+  );
+  const values = ["system", "light", "dark"];
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let storedTheme: string | null = null;
+  try {
+    storedTheme = localStorage.getItem(storageKey);
+  } catch {}
+  const initialTheme =
+    storedTheme === "light" || storedTheme === "dark" ? storedTheme : "system";
+  let themeTimer: number | undefined;
+
+  const setActiveIndex = (value: string) => {
+    if (!switcher) return;
+    switcher.dataset.activeIndex = String(values.indexOf(value));
+  };
+
+  const applyTheme = (value: string) => {
+    if (!reduceMotion.matches) {
+      root.classList.add("theme-transitioning");
+      // Commit the current palette before changing its semantic token values.
+      void root.offsetWidth;
+    }
+
+    if (value === "system") {
+      try {
+        localStorage.removeItem(storageKey);
+      } catch {}
+      delete root.dataset.theme;
+    } else {
+      try {
+        localStorage.setItem(storageKey, value);
+      } catch {}
+      root.dataset.theme = value;
+    }
+
+    const dark =
+      value === "dark" ||
+      (value === "system" &&
+        matchMedia("(prefers-color-scheme: dark)").matches);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", dark ? "#151515" : "#ffffff");
+
+    window.setTimeout(
+      () => root.classList.remove("theme-transitioning"),
+      reduceMotion.matches ? 0 : 520,
+    );
+  };
+
+  setActiveIndex(initialTheme);
+
+  inputs.forEach((input) => {
+    input.checked = input.value === initialTheme;
+    input.addEventListener("change", () => {
+      if (!input.checked) return;
+
+      setActiveIndex(input.value);
+
+      window.clearTimeout(themeTimer);
+      themeTimer = window.setTimeout(() => {
+        applyTheme(input.value);
+      }, 220);
+    });
+  });
+</script>

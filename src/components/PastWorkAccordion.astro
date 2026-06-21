@@ -1,0 +1,119 @@
+---
+import { ChevronDown } from "@lucide/astro";
+import { pastWork } from "../data/homepage";
+import Icon from "./Icon.astro";
+
+interface Props {
+  headingLevel?: "h2" | "h4";
+}
+
+const { headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<section
+  aria-labelledby="past-work-title"
+  class="past-work-section"
+>
+  <Heading class="section-heading" id="past-work-title">Past work</Heading>
+
+  <div class="past-work-list">
+    {
+      pastWork.map((item) => (
+        <article
+          class="past-work-item"
+          data-state="closed"
+          id={`past-work-${item.id}`}
+        >
+          <button
+            aria-controls={`past-work-panel-${item.id}`}
+            aria-expanded="false"
+            class="past-work-trigger"
+            id={`past-work-trigger-${item.id}`}
+            type="button"
+          >
+            <span class="past-work-summary">
+              <span class="past-work-primary">
+                <span class="past-work-company">{item.company}</span>
+                <span class="past-work-separator" aria-hidden="true">/</span>
+                <span class="meta">{item.role}</span>
+              </span>
+              <span class="past-work-leader" aria-hidden="true"></span>
+              <span class="meta past-work-time">{item.time}</span>
+              <Icon icon={ChevronDown} role="disclosure" optical="up" />
+            </span>
+          </button>
+
+          <div
+            aria-hidden="true"
+            aria-labelledby={`past-work-trigger-${item.id}`}
+            class="past-work-reveal"
+            id={`past-work-panel-${item.id}`}
+            inert
+            role="region"
+          >
+            <div class="past-work-reveal-inner">
+              <div class="past-work-panel">
+                <p class="past-work-copy">
+                  {item.lead} {item.detail}
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const items = Array.from(
+    document.querySelectorAll<HTMLElement>(".past-work-item"),
+  );
+
+  const setExpanded = (item: HTMLElement, expanded: boolean) => {
+    const trigger = item.querySelector<HTMLButtonElement>(".past-work-trigger");
+    const panel = item.querySelector<HTMLElement>(".past-work-reveal");
+    if (!trigger || !panel) return;
+
+    item.dataset.state = expanded ? "open" : "closed";
+    trigger.setAttribute("aria-expanded", String(expanded));
+    panel.setAttribute("aria-hidden", String(!expanded));
+    panel.inert = !expanded;
+  };
+
+  const closeOthers = (current: HTMLElement) => {
+    items.forEach((item) => {
+      if (item !== current && item.dataset.state === "open") {
+        setExpanded(item, false);
+      }
+    });
+  };
+
+  items.forEach((item) => {
+    if (item.dataset.motionReady === "true") return;
+    item.dataset.motionReady = "true";
+
+    const trigger = item.querySelector<HTMLButtonElement>(".past-work-trigger");
+    trigger?.addEventListener("click", () => {
+      const opening = item.dataset.state !== "open";
+      if (opening) closeOthers(item);
+      setExpanded(item, opening);
+    });
+
+    trigger?.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || item.dataset.state !== "open") return;
+      setExpanded(item, false);
+      trigger.focus();
+    });
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    const target = event.target;
+    if (target instanceof Element && target.closest(".past-work-item")) {
+      return;
+    }
+
+    items.forEach((item) => setExpanded(item, false));
+  });
+</script>

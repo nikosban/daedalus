@@ -3,44 +3,43 @@ import type { AstroComponent } from "@lucide/astro";
 
 interface Props {
   icon: AstroComponent;
-  size?: "text" | "small";
-  weight?: "regular" | "medium";
-  tone?: "inline" | "current";
-  optical?: "none" | "up" | "down" | "left" | "right";
+  role?:
+    | "inline"
+    | "navigation"
+    | "control"
+    | "disclosure"
+    | "metadata"
+    | "illustration";
+  emphasis?: "default" | "strong";
+  optical?: "none" | "up" | "down" | "left" | "right" | "up-right";
   label?: string;
 }
 
 const {
   icon: LucideIcon,
-  size = "text",
-  weight = "regular",
-  tone = "inline",
+  role = "inline",
+  emphasis = "default",
   optical = "none",
   label,
 } = Astro.props;
+
+const classes = [
+  "system-icon",
+  `system-icon--${role}`,
+  emphasis === "strong" && "system-icon--strong",
+  optical !== "none" && `system-icon--optical-${optical}`,
+];
 ---
 
 {
   label ? (
     <LucideIcon
-      class:list={[
-        "system-icon",
-        `system-icon--${size}`,
-        `system-icon--${weight}`,
-        `system-icon--${tone}`,
-        optical !== "none" && `system-icon--optical-${optical}`,
-      ]}
+      class:list={classes}
       aria-label={label}
+      focusable="false"
+      role="img"
     />
   ) : (
-    <LucideIcon
-      class:list={[
-        "system-icon",
-        `system-icon--${size}`,
-        `system-icon--${weight}`,
-        `system-icon--${tone}`,
-        optical !== "none" && `system-icon--optical-${optical}`,
-      ]}
-    />
+    <LucideIcon class:list={classes} aria-hidden="true" focusable="false" />
   )
 }

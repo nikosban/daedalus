@@ -1,0 +1,19 @@
+---
+import { selectedWork } from "../data/homepage";
+import ProjectRow from "./ProjectRow.astro";
+
+interface Props {
+  headingLevel?: "h2" | "h4";
+}
+
+const { headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<section class="selected-work" aria-labelledby="selected-work-title">
+  <Heading class="section-heading" id="selected-work-title">Selected work</Heading>
+
+  <div class="project-list">
+    {selectedWork.map((project) => <ProjectRow project={project} />)}
+  </div>
+</section>

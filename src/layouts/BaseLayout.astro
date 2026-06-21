@@ -26,7 +26,7 @@ const socialTitle = title === "Nikolaos Banis" ? title : `${title} — Nikolaos 
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f2efe5" />
+    <meta name="theme-color" content="#ffffff" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -39,6 +39,23 @@ const socialTitle = title === "Nikolaos Banis" ? title : `${title} — Nikolaos 
     <meta name="twitter:card" content="summary" />
 
     <title>{socialTitle}</title>
+    <script is:inline>
+      (() => {
+        let stored = null;
+        try {
+          stored = localStorage.getItem("theme");
+        } catch {}
+        if (stored === "light" || stored === "dark") {
+          document.documentElement.dataset.theme = stored;
+        }
+        const dark =
+          stored === "dark" ||
+          (!stored && matchMedia("(prefers-color-scheme: dark)").matches);
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute("content", dark ? "#151515" : "#ffffff");
+      })();
+    </script>
     <slot name="head" />
   </head>
   <body>

@@ -1,0 +1,17 @@
+---
+import { intro } from "../data/homepage";
+
+interface Props {
+  headingLevel?: "h2" | "h4";
+}
+
+const { headingLevel = "h2" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<section class="intro-section" aria-labelledby="intro-title">
+  <Heading class="visually-hidden" id="intro-title">Introduction</Heading>
+  <div class="intro-copy">
+    <p>{intro}</p>
+  </div>
+</section>

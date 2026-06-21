@@ -1,7 +1,9 @@
 ---
-import ProfileIntro from "../components/ProfileIntro.astro";
-import RoleList from "../components/RoleList.astro";
-import WorkCard from "../components/WorkCard.astro";
+import IdentityHeader from "../components/IdentityHeader.astro";
+import IntroSection from "../components/IntroSection.astro";
+import PastWorkAccordion from "../components/PastWorkAccordion.astro";
+import SelectedWorkList from "../components/SelectedWorkList.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const personSchema = {
@@ -15,15 +17,15 @@ const personSchema = {
     "Product design",
     "Data visualisation",
     "Design systems",
-    "User research",
-    "B2B SaaS",
+    "Analytical interfaces",
+    "Coded prototypes",
   ],
 };
 ---
 
 <BaseLayout
   title="Nikolaos Banis"
-  description="Senior Product Designer creating clear, trustworthy interfaces for complex data products, analytical workflows, and high-stakes decisions."
+  description="Senior Product Designer working on data-heavy products, analytical workflows, design systems, coded prototypes, and implementation-aware product work."
 >
   <script
     slot="head"
@@ -32,15 +34,20 @@ const personSchema = {
     set:html={JSON.stringify(personSchema)}
   />
 
-  <main id="main-content" class="page">
-    <ProfileIntro />
-    <RoleList />
+  <div class="site-frame">
+    <div class="site-side" aria-hidden="true"></div>
+    <div class="site-page">
+      <main id="main-content" class="home-main">
+        <div class="home-intro-group">
+          <IdentityHeader />
+          <IntroSection />
+        </div>
+        <PastWorkAccordion />
+        <SelectedWorkList />
+      </main>
 
-    <section aria-labelledby="work-title">
-      <h2 id="work-title">Selected work</h2>
-      <div class="work-list">
-        <WorkCard />
-      </div>
-    </section>
-  </main>
+      <SiteFooter />
+    </div>
+    <div class="site-side" aria-hidden="true"></div>
+  </div>
 </BaseLayout>

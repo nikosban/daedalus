@@ -1,0 +1,41 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import type { SelectedWorkItem } from "../data/homepage";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: SelectedWorkItem;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-row">
+  <div class="project-heading">
+    <div>
+      <h3>{project.title}</h3>
+      <p class="meta">{project.company}</p>
+    </div>
+    {
+      project.href ? (
+        <a class="project-action" href={project.href}>
+          <span>Read case study</span>
+          <Icon
+            icon={ArrowUpRight}
+            role="inline"
+            emphasis="strong"
+            optical="up-right"
+          />
+        </a>
+      ) : (
+        <p class="project-status meta">{project.status}</p>
+      )
+    }
+  </div>
+
+  <p class="project-description">{project.description}</p>
+
+  <ul class="tag-list" aria-label={`${project.title} focus areas`}>
+    {project.tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+</article>
