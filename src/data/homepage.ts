@@ -122,7 +122,8 @@ export const selectedWork: SelectedWorkItem[] = [
       "Operational tools",
       "Workflow design",
     ],
-    status: "Case study coming soon",
+    status: "Read case study",
+    href: "/work/invoice-management",
   },
   {
     id: "compass-design-system",

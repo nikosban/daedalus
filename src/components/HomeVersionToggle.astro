@@ -1,0 +1,58 @@
+<aside class="version-toggle" aria-label="Homepage version switcher">
+  <fieldset class="version-toggle-control" data-active-index="0">
+    <legend class="visually-hidden">Homepage version</legend>
+    <span aria-hidden="true" class="version-toggle-indicator"></span>
+    <label>
+      <input checked name="home-version" type="radio" value="v1" />
+      <span>V1</span>
+    </label>
+    <label>
+      <input name="home-version" type="radio" value="v2" />
+      <span>V2</span>
+    </label>
+  </fieldset>
+</aside>
+
+<script>
+  const versionStorageKey = "home-version";
+  const frame = document.querySelector<HTMLElement>(".site-frame");
+  const versionToggle = document.querySelector<HTMLElement>(
+    ".version-toggle-control",
+  );
+  const versionInputs = document.querySelectorAll<HTMLInputElement>(
+    '.version-toggle-control input[name="home-version"]',
+  );
+  const versionValues = ["v1", "v2"];
+
+  let storedVersion: string | null = null;
+  try {
+    storedVersion = localStorage.getItem(versionStorageKey);
+  } catch {}
+
+  const initialVersion = storedVersion === "v2" ? "v2" : "v1";
+
+  const setHomeVersion = (value: string) => {
+    if (!frame || !versionToggle) return;
+
+    frame.dataset.homeVersion = value;
+    versionToggle.dataset.activeIndex = String(versionValues.indexOf(value));
+
+    try {
+      if (value === "v1") {
+        localStorage.removeItem(versionStorageKey);
+      } else {
+        localStorage.setItem(versionStorageKey, value);
+      }
+    } catch {}
+  };
+
+  setHomeVersion(initialVersion);
+
+  versionInputs.forEach((input) => {
+    input.checked = input.value === initialVersion;
+    input.addEventListener("change", () => {
+      if (!input.checked) return;
+      setHomeVersion(input.value);
+    });
+  });
+</script>

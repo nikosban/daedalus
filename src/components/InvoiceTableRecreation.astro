@@ -1,0 +1,133 @@
+---
+import {
+  CalendarDays,
+  ChevronDown,
+  FileSpreadsheet,
+  FileText,
+  Search,
+} from "@lucide/astro";
+
+const rows = [
+  { status: "overdue", payNow: true },
+  { status: "overdue", payNow: true },
+  { status: "partial", payNow: true },
+  { status: "partial", payNow: true },
+  { status: "open", payNow: false },
+  { status: "open", payNow: false },
+  { status: "paid", payNow: false },
+  { status: "paid", payNow: false },
+  { status: "cancelled", payNow: false },
+  { status: "cancelled", payNow: false },
+] as const;
+
+const statusLabels = {
+  overdue: "Overdue",
+  partial: "Partial",
+  open: "Open",
+  paid: "Paid",
+  cancelled: "Cancelled",
+};
+---
+
+<div class="invoice-demo" aria-label="Invoice management table recreation">
+  <div class="invoice-demo-toolbar">
+    <div class="invoice-demo-tabs" aria-label="Invoice type">
+      <button class="is-active" type="button">All types</button>
+      <button type="button">Subscription</button>
+      <button type="button">Trading</button>
+    </div>
+
+    <button class="invoice-demo-filter invoice-demo-filter--status" type="button">
+      <span>Status</span>
+      <ChevronDown aria-hidden="true" />
+    </button>
+
+    <label class="invoice-demo-filter">
+      <Search aria-hidden="true" />
+      <span class="visually-hidden">Invoice number</span>
+      <input placeholder="Invoice number" type="text" />
+    </label>
+
+    <label class="invoice-demo-filter">
+      <Search aria-hidden="true" />
+      <span class="visually-hidden">Deal id</span>
+      <input placeholder="Deal id" type="text" />
+    </label>
+
+    <label class="invoice-demo-filter">
+      <CalendarDays aria-hidden="true" />
+      <span class="visually-hidden">Period</span>
+      <input placeholder="Period" type="text" />
+    </label>
+  </div>
+
+  <div class="invoice-demo-table-shell">
+    <table class="invoice-demo-table">
+      <caption class="visually-hidden">
+        Invoice records with payment status and document actions
+      </caption>
+      <thead>
+        <tr>
+          <th class="invoice-demo-check-cell" scope="col">
+            <input aria-label="Select all invoices" type="checkbox" />
+          </th>
+          <th scope="col"><span>Invoice number</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+          <th scope="col"><span>Description</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+          <th scope="col"><span>Issue date</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+          <th scope="col"><span>Due date</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+          <th class="invoice-demo-amount-heading" scope="col"><span class="invoice-demo-sort" aria-hidden="true"></span><span>Amount</span></th>
+          <th scope="col"><span>Status</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+          <th scope="col"><span>Actions</span><span class="invoice-demo-sort" aria-hidden="true"></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row, index) => (
+            <tr>
+              <td class="invoice-demo-check-cell">
+                <input aria-label={`Select invoice ${index + 1}`} type="checkbox" />
+              </td>
+              <td><a href="#invoice-recreation">454-2022-06-03</a></td>
+              <td>Invoice for {"{invoice-period}"}</td>
+              <td>28/05/2023</td>
+              <td>28/05/2023</td>
+              <td class="invoice-demo-amount">- $1,000.00</td>
+              <td>
+                <span class:list={["invoice-demo-status", `invoice-demo-status--${row.status}`]}>
+                  <span class="invoice-demo-status-mark" aria-hidden="true"></span>
+                  {statusLabels[row.status]}
+                </span>
+              </td>
+              <td>
+                <div class="invoice-demo-actions">
+                  <button type="button"><FileText aria-hidden="true" /><span>PDF</span></button>
+                  <button type="button"><FileSpreadsheet aria-hidden="true" /><span>XLS</span></button>
+                  {row.payNow && <button class="invoice-demo-pay" type="button">Pay now</button>}
+                </div>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <footer class="invoice-demo-pagination">
+      <p>1-10 of 100 items</p>
+      <nav aria-label="Invoice pages">
+        <button aria-label="First page" type="button">|←</button>
+        <button aria-label="Previous page" type="button">←</button>
+        <button aria-current="page" class="is-active" type="button">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button">4</button>
+        <button type="button">5</button>
+        <button type="button">6</button>
+        <button type="button">7</button>
+        <button aria-label="Next page" type="button">→</button>
+        <button aria-label="Last page" type="button">→|</button>
+      </nav>
+    </footer>
+  </div>
+
+  <p class="invoice-demo-help">Want to learn about invoices? <a href="#invoice-recreation">Click here</a></p>
+</div>

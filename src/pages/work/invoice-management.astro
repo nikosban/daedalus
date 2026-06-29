@@ -1,0 +1,296 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import Icon from "../../components/Icon.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const caseStudySchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: "Invoice Management Redesign",
+  description:
+    "Redesigning invoice management into a clearer payment workflow for logistics finance teams at Container xChange.",
+  author: {
+    "@type": "Person",
+    name: "Nikolaos Banis",
+    url: "https://www.nikosbanis.com",
+  },
+  about: [
+    "Invoice management",
+    "Payment workflows",
+    "Financial operations",
+    "B2B SaaS",
+  ],
+  url: "https://www.nikosbanis.com/work/invoice-management",
+};
+---
+
+<BaseLayout
+  title="Invoice Management Redesign — Container xChange"
+  description="Redesigning invoice and payment workflows for logistics finance teams, contributing to higher payment collections, fewer disputes, and faster invoice generation."
+  canonicalPath="/work/invoice-management"
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(caseStudySchema)}
+  />
+
+  <div class="site-frame case-frame">
+    <div class="site-page">
+      <div class="case-workspace">
+        <div class="case-content">
+          <nav class="cs-nav" aria-label="Breadcrumb">
+            <a href="/" class="cs-back">
+              <Icon icon={ArrowLeft} role="inline" />
+              Nikolaos Banis
+            </a>
+          </nav>
+
+          <article class="cs-article">
+            <header class="cs-header">
+          <div class="cs-kicker">
+            <span class="meta">Container xChange</span>
+            <span class="meta cs-kicker-sep" aria-hidden="true">·</span>
+            <span class="meta">6-month project</span>
+          </div>
+          <h1>Invoice Management Redesign</h1>
+          <p class="cs-subtitle">
+            Turning invoice management into a clearer payment workflow
+          </p>
+          <p class="cs-introduction">
+            Container xChange helps businesses lease, trade, and manage shipping
+            containers. Invoicing was one of the areas where operational
+            complexity showed up directly in the product.
+          </p>
+          <p class="cs-introduction">
+            I was the sole designer across invoice creation, invoice lists,
+            payment tracking, invoice details, filtering, dispute context,
+            testing, and implementation support.
+          </p>
+            </header>
+
+        <section class="cs-highlights" aria-labelledby="impact-title">
+          <h2 class="cs-highlights-label" id="impact-title">Impact</h2>
+          <dl class="cs-metrics">
+            <div>
+              <dt>Payment collections</dt>
+              <dd>+24%</dd>
+            </div>
+            <div>
+              <dt>Invoicing disputes</dt>
+              <dd>−45%</dd>
+            </div>
+            <div>
+              <dt>Dispute support requests</dt>
+              <dd>−30%</dd>
+            </div>
+            <div>
+              <dt>Invoice generation speed</dt>
+              <dd>+38%</dd>
+            </div>
+            <div>
+              <dt>Dispute resolution time</dt>
+              <dd>5 → 3.2 days</dd>
+            </div>
+          </dl>
+          <p class="cs-highlights-note meta">
+            Informed by product analytics, support tickets, user interviews,
+            four rounds of usability testing, and implementation constraints.
+          </p>
+        </section>
+
+        <div class="cs-body">
+          <section class="cs-section">
+            <h2>The problem was not only invoices</h2>
+            <p>
+              At first, invoice management looks simple. A user creates an
+              invoice, sends it, tracks payment, and closes the loop when the
+              money arrives. That works when the invoice is expected, correct,
+              and easy to understand.
+            </p>
+            <p>
+              At xChange, invoices often became exceptions. They could be
+              overdue, disputed, tied to logistics activity the customer did
+              not recognize, or blocked by missing context. When that happened,
+              the invoice stopped being a document and became a question.
+            </p>
+            <ul class="cs-questions">
+              <li>What is this charge for?</li>
+              <li>Has it been paid?</li>
+              <li>Why is it disputed?</li>
+              <li>What needs to happen next?</li>
+            </ul>
+            <p>
+              The old experience did not answer those questions clearly enough.
+              Users could access invoices, but unclear statuses, weak
+              hierarchy, and limited filters made it difficult to understand
+              what needed attention.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Start with visibility</h2>
+            <p>
+              Finance teams do not manage invoices one by one. They scan for
+              overdue payments, disputes, pending invoices, customer issues,
+              and other exceptions.
+            </p>
+            <p>
+              The previous interface required too much manual inspection before
+              users could understand what was happening. The first design move
+              was therefore to make invoice state clearer.
+            </p>
+            <p>
+              Paid, pending, overdue, and disputed invoices became visible at a
+              glance. The list view began helping users prioritize work rather
+              than only displaying records, giving them a faster way to
+              understand where money was stuck.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Status does not explain the dispute</h2>
+            <p>
+              A disputed invoice is not resolved by labelling it “disputed.”
+              The user still needs to understand why.
+            </p>
+            <p>
+              In logistics, an invoice can be connected to container activity,
+              transactions, routes, dates, charges, payment history, and
+              customer agreements. When that context is difficult to find,
+              users delay payment, open a dispute, or contact support.
+            </p>
+            <p>
+              I redesigned the detail experience around the relationship
+              between the invoice and its supporting transaction data. The goal
+              was to explain what the invoice referred to, why the charge
+              existed, and what action was required next.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>More detail created another problem</h2>
+            <p>
+              Adding context helped, but financial workflows need both detail
+              and speed. Showing every piece of information with equal
+              importance would make the screen technically complete but
+              practically difficult to use.
+            </p>
+            <ol class="cs-sequence">
+              <li>Show the invoice state</li>
+              <li>Explain the reason</li>
+              <li>Provide the supporting details</li>
+              <li>Present the available action</li>
+            </ol>
+            <p>
+              This hierarchy became the structure of the invoice detail page.
+              Users did not need every detail immediately; they needed the right
+              level of detail at the right moment.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Finding invoices was part of the workflow</h2>
+            <p>
+              The old experience had almost no filtering. That was a major
+              limitation because finance teams often work through groups of
+              invoices rather than searching for one known record.
+            </p>
+            <ul class="cs-questions">
+              <li>Overdue invoices</li>
+              <li>Disputed invoices</li>
+              <li>Invoices from a specific customer</li>
+              <li>Invoices that need action this week</li>
+              <li>Invoices connected to a specific transaction</li>
+            </ul>
+            <p>
+              I added advanced filters and search patterns around the way
+              finance teams investigate payment issues. This changed the list
+              from a table of records into an operational workspace.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Backend limitations shaped the solution</h2>
+            <p>
+              Not every piece of invoice logic was easy to expose, combine, or
+              filter. Some desired states and relationships depended on backend
+              structures that were not designed for this level of workflow
+              visibility.
+            </p>
+            <p>
+              I worked closely with product and engineering to identify which
+              states were reliable, which filters were feasible, and where the
+              interface needed to account for technical limits.
+            </p>
+            <p>
+              Some ideas were simplified and others sequenced for later. The
+              priority was preserving user value without designing flows the
+              system could not support reliably.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Testing the workflow</h2>
+            <p>
+              We tested the redesign through four rounds of usability testing.
+              The purpose was not only to confirm that the screens looked
+              clearer, but to determine whether users could complete the
+              payment workflow with less confusion.
+            </p>
+            <ul class="cs-questions">
+              <li>Can users find the invoice they need?</li>
+              <li>Can they understand its status?</li>
+              <li>Can they see why it is overdue or disputed?</li>
+              <li>Can they identify the next action?</li>
+              <li>Can they do this without contacting support?</li>
+            </ul>
+            <p>
+              Feedback refined the hierarchy, filters, transaction context, and
+              invoice creation flow.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>Reducing friction at the start</h2>
+            <p>
+              Some invoice problems began before payment. The creation flow
+              required too much manual input, increasing the chance of mistakes
+              and slowing users down.
+            </p>
+            <p>
+              I reduced manual fields and simplified the flow. Invoice
+              generation time fell from three minutes to 1.8 minutes, reducing
+              friction before an invoice was sent.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <h2>The final shift</h2>
+            <p>
+              The redesign changed the product from a place where users could
+              access invoices into a workflow for managing payment issues.
+            </p>
+            <ul class="cs-outcomes">
+              <li>Users could find invoices faster</li>
+              <li>Invoice state became easier to understand</li>
+              <li>Dispute context stayed connected to its transaction data</li>
+              <li>Next actions became clearer</li>
+              <li>Invoice creation required less manual effort</li>
+            </ul>
+            <p>
+              For the business, this translated into higher payment collection,
+              fewer disputes, and fewer support requests. For users, the value
+              was simpler: they no longer had to piece together the story of an
+              invoice themselves.
+            </p>
+          </section>
+        </div>
+          </article>
+        </div>
+        <aside class="case-empty" aria-hidden="true"></aside>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

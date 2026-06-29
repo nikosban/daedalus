@@ -4,6 +4,7 @@ import {
   BriefcaseBusiness,
   Download,
   FolderKanban,
+  ReceiptText,
   Layers,
   Mail,
   MonitorCog,
@@ -18,6 +19,7 @@ import {
 import Icon from "../../components/Icon.astro";
 import IdentityHeader from "../../components/IdentityHeader.astro";
 import IntroSection from "../../components/IntroSection.astro";
+import InvoiceTableRecreation from "../../components/InvoiceTableRecreation.astro";
 import PastWorkAccordion from "../../components/PastWorkAccordion.astro";
 import ProjectRow from "../../components/ProjectRow.astro";
 import SelectedWorkList from "../../components/SelectedWorkList.astro";
@@ -64,6 +66,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <li><a href="#past-work-section"><Icon icon={BriefcaseBusiness} role="navigation" /><span>Past work</span></a></li>
             <li><a href="#selected-work-section"><Icon icon={FolderKanban} role="navigation" /><span>Selected work</span></a></li>
             <li><a href="#footer-section"><Icon icon={PanelBottom} role="navigation" /><span>Footer</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="meta">Recreations</span>
+          <ul>
+            <li><a href="#invoice-recreation"><Icon icon={ReceiptText} role="navigation" /><span>Invoice table</span></a></li>
           </ul>
         </div>
       </nav>
@@ -407,6 +415,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <SiteFooter />
           </article>
         </div>
+      </section>
+
+      <section class="library-group invoice-recreation-group" aria-labelledby="recreations-title">
+        <header>
+          <h2 id="recreations-title">Project recreations</h2>
+          <p>High-fidelity reconstruction of shipped interface work.</p>
+        </header>
+        <article class="library-example" id="invoice-recreation">
+          <header>
+            <h3>Invoice management table</h3>
+            <p class="meta">Container xChange · static reference recreation</p>
+          </header>
+          <div class="invoice-recreation-breakout">
+            <InvoiceTableRecreation />
+          </div>
+        </article>
       </section>
     </main>
   </div>

@@ -1,8 +1,27 @@
 ---
 import { ArrowLeft } from "@lucide/astro";
 import Icon from "../../components/Icon.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const caseStudySchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: "Statistics Page Redesign",
+  description:
+    "Redesigning a page template used across more than one million statistics pages at Statista.",
+  author: {
+    "@type": "Person",
+    name: "Nikolaos Banis",
+    url: "https://www.nikosbanis.com",
+  },
+  about: [
+    "Statistics pages",
+    "Data visualization",
+    "Page templates",
+    "AI-assisted research",
+  ],
+  url: "https://www.nikosbanis.com/work/statista-statistics",
+};
 ---
 
 <BaseLayout
@@ -10,18 +29,26 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   description="Redesigning a page template used across 1M+ statistics pages, improving page structure, data visualization modularity, and integrating AI-assisted research continuations."
   canonicalPath="/work/statista-statistics"
 >
-  <div class="site-frame">
-    <div class="site-side" aria-hidden="true"></div>
-    <div class="site-page">
-      <nav class="cs-nav" aria-label="Breadcrumb">
-        <a href="/" class="cs-back">
-          <Icon icon={ArrowLeft} role="inline" />
-          Nikolaos Banis
-        </a>
-      </nav>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(caseStudySchema)}
+  />
 
-      <article class="cs-article">
-        <header class="cs-header">
+  <div class="site-frame case-frame">
+    <div class="site-page">
+      <div class="case-workspace">
+        <div class="case-content">
+          <nav class="cs-nav" aria-label="Breadcrumb">
+            <a href="/" class="cs-back">
+              <Icon icon={ArrowLeft} role="inline" />
+              Nikolaos Banis
+            </a>
+          </nav>
+
+          <article class="cs-article">
+            <header class="cs-header">
           <div class="cs-kicker">
             <span class="meta">Statista</span>
             <span class="meta cs-kicker-sep" aria-hidden="true">·</span>
@@ -31,21 +58,44 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <p class="cs-subtitle">
             Redesigning a page template used across 1M+ statistics pages
           </p>
-        </header>
+          <p class="cs-introduction">
+            Statistic pages are among the most visited pages on Statista. Each
+            page has a simple job: present one statistic, explain its context,
+            and help users decide what to do next.
+          </p>
+          <p class="cs-introduction">
+            I was responsible for the page redesign and coordinated teams
+            across data visualization, recommendations, AI, content, and
+            engineering. I also covered much of the data visualization
+            direction while the responsible designer was absent.
+          </p>
+            </header>
 
-        <div class="cs-highlights">
-          <p class="cs-highlights-label">What changed</p>
+        <section class="cs-highlights" aria-labelledby="changes-title">
+          <h2 class="cs-highlights-label" id="changes-title">What changed</h2>
           <ul class="cs-highlights-list">
-            <li>A clearer page structure that moves from orientation to data interpretation to next steps</li>
-            <li>A modular data visualization widget that can work across surfaces and contexts</li>
-            <li>Better placement of supporting text, recommendations, and source information</li>
-            <li>A contextual AI side panel that helps users continue from the statistic they are viewing</li>
+            <li>
+              A clearer page structure moving from orientation to data
+              interpretation and next steps
+            </li>
+            <li>
+              A modular data visualization widget that works across surfaces
+              and contexts
+            </li>
+            <li>
+              Better placement of supporting text, recommendations, and source
+              information
+            </li>
+            <li>
+              A contextual AI side panel that helps users continue from the
+              statistic they are viewing
+            </li>
           </ul>
           <p class="cs-highlights-note meta">
             The first release showed positive movement in downloads per session,
             recommendation usage, and user feedback. Full rollout data pending.
           </p>
-        </div>
+        </section>
 
         <div class="cs-body">
           <section class="cs-section">
@@ -105,7 +155,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               interacting with the chart, they could understand the statistic,
               judge relevance, and decide whether it was useful for their work.
             </p>
-            <p>That solved the first layer of the problem. But the center of the page was still the chart.</p>
+            <p>
+              That solved the first layer of the problem. But the center of the
+              page was still the chart.
+            </p>
           </section>
 
           <section class="cs-section">
@@ -221,7 +274,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               different areas: data visualization, recommendations, AI, content,
               and engineering.
             </p>
-            <p>My role was to create the structure that made those parts work together. That meant defining the page logic clearly enough that every team understood where their work belonged.</p>
+            <p>
+              My role was to create the structure that made those parts work
+              together. That meant defining the page logic clearly enough that
+              every team understood where their work belonged.
+            </p>
             <ul class="cs-questions">
               <li>What belongs in the header?</li>
               <li>What belongs inside the chart widget?</li>
@@ -281,10 +338,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </p>
           </section>
         </div>
-      </article>
-
-      <SiteFooter />
+          </article>
+        </div>
+        <aside class="case-empty" aria-hidden="true"></aside>
+      </div>
     </div>
-    <div class="site-side" aria-hidden="true"></div>
   </div>
 </BaseLayout>

@@ -70,6 +70,49 @@ test("homepage frame uses diagonal side fields and single separators", async () 
   assert.match(css, /\.home-main>\*\{min-width:0/);
 });
 
+test("homepage exposes a persistent version toggle for iteration", async () => {
+  const html = await readOutput("index.html");
+  const css = await readSource("src/styles/global.css");
+  const component = await readSource("src/components/HomeVersionToggle.astro");
+
+  assert.match(html, /data-home-version="v1"/);
+  assert.match(html, /aria-label="Homepage version switcher"/);
+  assert.match(html, /name="home-version"/);
+  assert.match(html, /value="v1"/);
+  assert.match(html, /value="v2"/);
+  assert.match(html, /version-toggle-indicator/);
+  assert.match(component, /localStorage\.getItem\(versionStorageKey\)/);
+  assert.match(component, /frame\.dataset\.homeVersion = value/);
+  assert.match(css, /\.version-toggle\s*\{/);
+  assert.match(css, /\.site-frame\[data-home-version="v2"\]\s*\{/);
+});
+
+test("homepage v2 provides a two-column case-study explorer", async () => {
+  const html = await readOutput("index.html");
+  const css = await readSource("src/styles/global.css");
+  const component = await readSource("src/components/HomeVersionTwo.astro");
+
+  assert.match(html, /class="home-v2"/);
+  assert.match(html, /data-home-v2-workspace/);
+  assert.doesNotMatch(html, /Current page/);
+  assert.match(html, /Past experience/);
+  assert.doesNotMatch(html, /Design canvas/);
+  assert.equal((html.match(/class="home-v2-case-row/g) ?? []).length, 6);
+  assert.match(html, /class="home-v2-case-row" href="\/work\/statista-statistics"/);
+  assert.match(html, /class="home-v2-case-row" href="\/work\/invoice-management"/);
+  assert.match(html, /class="home-v2-case-row home-v2-case-row--draft"/);
+  assert.equal((html.match(/class="home-v2-experience-item"/g) ?? []).length, 5);
+  assert.doesNotMatch(component, /showProject|showExplorer|data-home-v2-detail/);
+  assert.match(css, /\.site-frame\[data-home-version="v2"\]\s*\{[\s\S]*?grid-template-columns: minmax\(0, 1fr\)/);
+  assert.match(css, /\.site-frame\[data-home-version="v2"\] \.site-side/);
+  assert.match(css, /\.site-frame\[data-home-version="v2"\] \.site-footer/);
+  assert.match(css, /grid-template-columns: minmax\(20rem, 40rem\) minmax\(0, 1fr\)/);
+  assert.match(css, /\.home-v2-column--empty/);
+  assert.doesNotMatch(css, /\.home-v2-page-card|\.home-v2-detail-view/);
+  assert.doesNotMatch(css, /\.home-v2-canvas/);
+  assert.match(css, /\.site-frame\[data-home-version="v2"\] \.home-version-v1/);
+});
+
 test("header exposes accessible icon-only actions without a dead CV link", async () => {
   const html = await readOutput("index.html");
 
@@ -226,6 +269,10 @@ test("typography uses corrective tracking and resilient wrapping", async () => {
 test("color and icon roles remain accessible across themes and system modes", async () => {
   const tokens = await readSource("src/styles/tokens.css");
   const css = await readSource("src/styles/global.css");
+  const productionCss = css.replace(
+    /\/\* High-fidelity project recreations \*\/[\s\S]*?\/\* Case study pages \*\//,
+    "/* Case study pages */",
+  );
   const icon = await readSource("src/components/Icon.astro");
   const linkedInIcon = await readSource("src/components/LinkedInIcon.astro");
   const xIcon = await readSource("src/components/XIcon.astro");
@@ -255,7 +302,7 @@ test("color and icon roles remain accessible across themes and system modes", as
   assert.match(css, /@media \(forced-colors: active\)/);
   assert.match(css, /\.system-icon\s*\{[^}]*color: currentColor/);
   assert.match(css, /\.brand-icon\s*\{[^}]*color: currentColor/);
-  assert.doesNotMatch(css, /#[0-9a-f]{3,8}|rgb\(/i);
+  assert.doesNotMatch(productionCss, /#[0-9a-f]{3,8}|rgb\(/i);
   assert.match(icon, /aria-hidden="true" focusable="false"/);
   assert.match(linkedInIcon, /fill="currentColor"/);
   assert.match(linkedInIcon, /focusable="false"/);
@@ -359,4 +406,82 @@ test("playground is excluded from the sitemap", async () => {
 
   assert.match(sitemap, /https:\/\/www\.nikosbanis\.com\//);
   assert.doesNotMatch(sitemap, /playground/);
+});
+
+test("invoice management case study renders approved content and metadata", async () => {
+  const html = await readOutput("work/invoice-management/index.html");
+
+  assert.match(html, /Invoice Management Redesign/);
+  assert.match(html, /Container xChange/);
+  assert.match(html, /Turning invoice management into a clearer payment workflow/);
+  assert.match(html, /Payment collections/);
+  assert.match(html, /\+24%/);
+  assert.match(html, /−45%/);
+  assert.match(html, /5 → 3\.2 days/);
+  assert.match(html, /The problem was not only invoices/);
+  assert.match(html, /Backend limitations shaped the solution/);
+  assert.match(html, /four rounds of usability testing/i);
+  assert.match(html, /application\/ld\+json/);
+  assert.match(html, /https:\/\/www\.nikosbanis\.com\/work\/invoice-management/);
+  assert.match(html, /class="site-frame case-frame"/);
+  assert.match(html, /class="case-workspace"/);
+  assert.match(html, /class="case-empty"/);
+  assert.doesNotMatch(html, /class="site-side"/);
+  assert.doesNotMatch(html, /class="site-footer"/);
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /cs_invoices\.md/);
+});
+
+test("homepage links to the invoice case study", async () => {
+  const html = await readOutput("index.html");
+  const sitemap = await readOutput("sitemap-0.xml");
+
+  assert.match(html, /href="\/work\/invoice-management"/);
+  assert.match(
+    sitemap,
+    /https:\/\/www\.nikosbanis\.com\/work\/invoice-management/,
+  );
+});
+
+test("statista case study uses the shared editorial structure", async () => {
+  const html = await readOutput("work/statista-statistics/index.html");
+
+  assert.match(html, /Statistics Page Redesign/);
+  assert.match(html, /Statistic pages are among the most visited pages/);
+  assert.match(html, /I was responsible for the page redesign/);
+  assert.match(html, /<h2[^>]*id="changes-title"[^>]*>What changed<\/h2>/);
+  assert.match(html, /application\/ld\+json/);
+  assert.match(
+    html,
+    /https:\/\/www\.nikosbanis\.com\/work\/statista-statistics/,
+  );
+  assert.match(html, /class="site-frame case-frame"/);
+  assert.match(html, /class="case-workspace"/);
+  assert.match(html, /class="case-empty"/);
+  assert.doesNotMatch(html, /class="site-side"/);
+  assert.doesNotMatch(html, /class="site-footer"/);
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /cs_statista\.md/);
+});
+
+test("playground includes the static invoice table recreation", async () => {
+  const html = await readOutput("playground/index.html");
+
+  assert.match(html, /id="invoice-recreation"/);
+  assert.match(html, /Project recreations/);
+  assert.match(html, /Invoice management table/);
+  assert.match(html, /All types/);
+  assert.match(html, /Subscription/);
+  assert.match(html, /Invoice number/);
+  assert.equal((html.match(/454-2022-06-03/g) ?? []).length, 10);
+  assert.equal((html.match(/Invoice for \{invoice-period\}/g) ?? []).length, 10);
+  assert.equal((html.match(/invoice-demo-status--overdue/g) ?? []).length, 2);
+  assert.equal((html.match(/invoice-demo-status--partial/g) ?? []).length, 2);
+  assert.equal((html.match(/invoice-demo-status--open/g) ?? []).length, 2);
+  assert.equal((html.match(/invoice-demo-status--paid/g) ?? []).length, 2);
+  assert.equal((html.match(/invoice-demo-status--cancelled/g) ?? []).length, 2);
+  assert.equal((html.match(/Pay now/g) ?? []).length, 4);
+  assert.match(html, /1-10 of 100 items/);
+  assert.match(html, /Want to learn about invoices\?/);
+  assert.match(html, /href="#invoice-recreation"/);
 });

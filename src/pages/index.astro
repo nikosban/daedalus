@@ -1,5 +1,7 @@
 ---
 import IdentityHeader from "../components/IdentityHeader.astro";
+import HomeVersionToggle from "../components/HomeVersionToggle.astro";
+import HomeVersionTwo from "../components/HomeVersionTwo.astro";
 import IntroSection from "../components/IntroSection.astro";
 import PastWorkAccordion from "../components/PastWorkAccordion.astro";
 import SelectedWorkList from "../components/SelectedWorkList.astro";
@@ -34,20 +36,26 @@ const personSchema = {
     set:html={JSON.stringify(personSchema)}
   />
 
-  <div class="site-frame">
+  <div class="site-frame" data-home-version="v1">
     <div class="site-side" aria-hidden="true"></div>
     <div class="site-page">
       <main id="main-content" class="home-main">
-        <div class="home-intro-group">
+        <div class="home-intro-group home-version-v1">
           <IdentityHeader />
           <IntroSection />
         </div>
-        <PastWorkAccordion />
-        <SelectedWorkList />
+        <div class="home-version-v1">
+          <PastWorkAccordion />
+        </div>
+        <div class="home-version-v1">
+          <SelectedWorkList />
+        </div>
+        <HomeVersionTwo />
       </main>
 
       <SiteFooter />
     </div>
     <div class="site-side" aria-hidden="true"></div>
   </div>
+  <HomeVersionToggle />
 </BaseLayout>

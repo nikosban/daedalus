@@ -1,0 +1,64 @@
+---
+import { intro, pastWork, selectedWork } from "../data/homepage";
+---
+
+<section class="home-v2" aria-labelledby="home-v2-title">
+  <div class="home-v2-workspace" data-home-v2-workspace>
+    <div class="home-v2-column home-v2-column--explorer">
+      <div class="home-v2-explorer-view" data-home-v2-explorer>
+        <header class="home-v2-header">
+          <p class="meta">Nikolaos Banis</p>
+          <h2 id="home-v2-title">Senior Product Designer</h2>
+        </header>
+
+        <p class="home-v2-intro">{intro}</p>
+
+        <div class="home-v2-section">
+          <p class="home-v2-section-label meta">Past experience</p>
+          <div class="home-v2-experience-list">
+            {
+              pastWork.map((item) => (
+                <article class="home-v2-experience-item">
+                  <div>
+                    <h3>{item.company}</h3>
+                    <p class="meta">{item.role}</p>
+                  </div>
+                  <p class="meta">{item.time}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="home-v2-section">
+          <p class="home-v2-section-label meta">Case studies</p>
+          <div class="home-v2-case-list">
+            {
+              selectedWork.map((project) =>
+                project.href ? (
+                  <a class="home-v2-case-row" href={project.href}>
+                    <span>
+                      <strong>{project.title}</strong>
+                      <span class="meta">{project.company}</span>
+                    </span>
+                    <span class="meta">Open</span>
+                  </a>
+                ) : (
+                  <article class="home-v2-case-row home-v2-case-row--draft">
+                    <span>
+                      <strong>{project.title}</strong>
+                      <span class="meta">{project.company}</span>
+                    </span>
+                    <span class="meta">{project.status}</span>
+                  </article>
+                ),
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="home-v2-column home-v2-column--empty" aria-hidden="true"></aside>
+  </div>
+</section>
